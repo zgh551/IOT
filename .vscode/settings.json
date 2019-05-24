@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "led.h": "c",
+        "ap_mqtt.h": "c",
+        "smart_config.h": "c",
+        "string.h": "c",
+        "wifi.h": "c",
+        "mqtt_esp_tcp.h": "c",
+        "mqtt_ibm.h": "c",
+        "stdio.h": "c",
+        "socket_udp_server.h": "c",
+        "json_packet.h": "c",
+        "hdc1080.h": "c",
+        "ccs811.h": "c"
+    }
+}

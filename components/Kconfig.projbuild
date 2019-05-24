@@ -1,0 +1,162 @@
+menu "ZGH Component Configuration"
+menu "WIFI Configuration"
+choice ESP_WIFI_MODE
+    prompt "AP or STA"
+    default ESP_WIFI_IS_STATION
+    help
+        Whether the esp32 is softAP or station.
+
+config ESP_WIFI_IS_SOFTAP
+    bool "SoftAP"
+config ESP_WIFI_IS_STATION
+    bool "Station"
+endchoice
+
+config ESP_WIFI_MODE_AP
+    bool
+    default y if ESP_WIFI_IS_SOFTAP
+    default n if ESP_WIFI_IS_STATION
+
+config ESP_WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+	SSID (network name) for the example to connect to.
+
+config ESP_WIFI_PASSWORD
+    string "WiFi Password"
+    default "mypassword"
+    help
+	WiFi password (WPA or WPA2) for the example to use.
+		
+config MAX_STA_CONN
+    int "Max STA conn"
+    default 4
+    help
+	Max number of the STA connects to AP.
+endmenu
+
+menu "MQTT IBM Configuration"
+config WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+        SSID (network name) for the example to connect to.
+
+config WIFI_PASSWORD
+    string "WiFi Password"
+    default "mypassword"
+    help
+        WiFi password (WPA or WPA2) for the example to use.
+        Can be left blank if the network has no security set.
+        
+config MQTT_BROKER
+    string "MQTT broker"
+    default "mosquitto.org"
+    help
+        MQTT broker which you want to login, either IP address or domain name is OK.
+
+config MQTT_PORT
+    int "Default MQTT port"
+    default 1883
+    help
+        MQTT port.
+
+config MQTT_SUB_TOPIC
+    string "MQTT subscribe topic"
+    default "/espressif/sub"
+    help
+        MQTT subscribe topic to MQTT broker.
+
+choice MQTT_SUB_QOS
+    prompt "MQTT Subscribe QoS"
+    default SUB_QOS1
+    help
+        MQTT subcribe QoS level.
+
+config SUB_QOS0
+    bool "QOS0"
+config SUB_QOS1
+    bool "QOS1"
+config SUB_QOS2
+    bool "QOS2"
+endchoice
+
+config DEFAULT_MQTT_SUB_QOS
+    int
+    default 0 if SUB_QOS0
+    default 1 if SUB_QOS1
+    default 2 if SUB_QOS2
+
+config MQTT_PUB_TOPIC
+    string "MQTT publish topic"
+    default "/espressif/pub"
+    help
+        MQTT publish topic to MQTT broker.
+
+choice MQTT_PUB_QOS
+    prompt "MQTT publish QoS"
+    default PUB_QOS1
+    help
+        MQTT publish QoS level.
+
+config PUB_QOS0
+    bool "QOS0"
+config PUB_QOS1
+    bool "QOS1"
+config PUB_QOS2
+    bool "QOS2"
+endchoice
+
+config DEFAULT_MQTT_PUB_QOS
+    int
+    default 0 if PUB_QOS0
+    default 1 if PUB_QOS1
+    default 2 if PUB_QOS2
+
+config MQTT_PUBLISH_INTERVAL
+    int "MQTT publish interval(ms)"
+    default 0
+    help
+        Default MQTT publish message interval.
+
+config MQTT_PAYLOAD_BUFFER
+    int "MQTT payload size(Bytes)"
+    default 1460
+    help
+        1460~2048 is recommended.
+        MQTT payload size.
+endmenu
+
+menu "MQTT ESP TCP Configuration"
+config WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+        SSID (network name) for the example to connect to.
+
+config WIFI_PASSWORD
+    string "WiFi Password"
+    default "mypassword"
+    help
+        WiFi password (WPA or WPA2) for the example to use.
+
+config BROKER_URL
+    string "Broker URL"
+    default "mqtt://iot.eclipse.org"
+    help
+        URL of the broker to connect to
+
+config BROKER_URL_FROM_STDIN
+    bool "Broker Url From STDIN"
+    default y if BROKER_URL = "FROM_STDIN"
+
+config CONFIG_BROKER_PORT
+    int "Mqtt Tcp Port"
+    default 62000
+    help
+        Port of the broker to connect to
+
+endmenu
+
+endmenu
